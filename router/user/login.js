@@ -4,7 +4,7 @@ var path = require('path');
 
 var userList = require('./userList').userList;
 router.get('/user/welcome',(req,res)=>{
-    console.log('displayname ',req.session.displayname)
+    console.log(userList,'displayname ',req.session.displayname)
     res.render(path.join('.','user','welcome'),{dispname : req.session.displayname});
 })
 
