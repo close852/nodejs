@@ -20,11 +20,6 @@ app.use(session({
     resave:false,
     saveUninitialized:true
 }))
-// app.use(methodOverride('_method'))
-// app.use(methodOverride('X-HTTP-Method'))          // Microsoft
-// app.use(methodOverride('X-HTTP-Method-Override')) // Google/GData
-// app.use(methodOverride('X-Method-Override'))      // IBM
-//bodyParser 먼저 선언하고 내용 수정하면 쓸 수 있음.
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(methodOverride((req, res)=> {
     if (req.body && typeof req.body === 'object' && req.body._method) {
