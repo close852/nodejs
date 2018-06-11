@@ -25,6 +25,7 @@ router.route('/user/register')
     }
 
     userList.push(temp);
+    req.session.user=temp;
     req.session.displayname=temp.displayname;
     return req.session.save(()=>{
         return res.redirect('/user/welcome');
