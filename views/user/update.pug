@@ -10,13 +10,19 @@ html
             })
     body
         h1 사용자정보 수정
-        form(action="/user/update", method="post")
-            input(type="hidden", name="_method" value="put")
-            div
-                input(type='text' name='username' placeholder='username')
-            div
-                input(type='password' name='password' placeholder='password')
-            div
-                input(type='text' name='displayname' placeholder='displayname')
-            div
-                input(type='submit' value='Register')
+        form(action="/user/update", method="post" enctype='application/x-www-form-urlencoded')
+            -if(user){
+                input(type="hidden", name="_method" value="PUT")
+                div
+                    input(type='text' name='username' placeholder='username' value=user.username) 
+                div
+                    input(type='password' name='password' placeholder='●●●●●●●●●')
+                div
+                    input(type='text' name='displayname' placeholder='displayname' value=user.displayname)
+                div
+                    input(type='submit' value='Update')
+            -}else{
+                script(type='text/javascript').
+                    alert('세션이 종료 되었습니다.');
+                    location.href='/user/welcome';
+            -}

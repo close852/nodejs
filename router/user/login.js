@@ -20,6 +20,7 @@ router.route('/user/login')
     })
     if(user){
         console.log(user,user.displayname);
+        req.session.user=user;
         req.session.displayname=user.displayname;
         return req.session.save(()=>{
             res.redirect('/user/welcome');

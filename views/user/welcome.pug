@@ -7,6 +7,8 @@ html
         h1 WELCOME! #{dispname}
         -if(dispname){
             div
+                a(href='/user/update') Update
+            div
                 a(href='/user/logout') Logout
         -}else{
             div
