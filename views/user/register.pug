@@ -1,0 +1,22 @@
+doctype html
+html
+    head
+        meta(charset='utf-8')
+        title welcome
+        script(src="/jquery/jquery.js")
+        script(type='text/javascript').
+            $(document).ready(()=>{
+                //- alert('hello');
+            })
+            
+    body
+        h1 REGISTER
+        form(action="/user/register", method="post")
+            div
+                input(type='text' name='username' placeholder='username')
+            div
+                input(type='password' name='password' placeholder='password')
+            div
+                input(type='text' name='displayname' placeholder='displayname')
+            div
+                input(type='submit' value='Register')

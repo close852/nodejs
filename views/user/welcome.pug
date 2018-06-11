@@ -1,0 +1,16 @@
+doctype html
+html
+    head
+        meta(charset='utf-8')
+        title welcome
+    body
+        h1 WELCOME! #{dispname}
+        -if(dispname){
+            div
+                a(href='/user/logout') Logout
+        -}else{
+            div
+                a(href='/user/login') Login
+            div
+                a(href='/user/register') Register
+        -}
