@@ -3,13 +3,12 @@ var router = express.Router();
 var path = require('path');
 
 var userList = require('./userList').userList;
-var bkdf2Password = require('pbkdf2-password');
-var hasher = bkdf2Password();
-router.route('/user/update')
+
+router.route('/user/delete')
 .get((req,res)=>{
-    res.render(path.join('.','user','update'),{user : req.session.user});
+    res.render(path.join('.','user','delete'),{user : req.session.user});
 })
-.put((req,res)=>{
+.delete((req,res)=>{
     var temp ={
         username : req.body.username,
         password : req.body.password,
@@ -19,16 +18,10 @@ router.route('/user/update')
         var user = userList[i];
         console.log(user,temp);
         if(user.username===temp.username){
-            if(temp.password){
-                hasher({password:temp.password , salt : user.salt},(err,pass,salt,hash)=>{
-                    user.password = hash;
-                })
-            }
-            if(temp.displayname){
-                user.displayname = temp.displayname;
-            }
-            req.session.displayname = temp.displayname;
-            req.session.user = user;
+            userList.splice(i,1);
+            console.log(userList,'이거냐');
+            delete req.session.displayname;
+            delete req.session.user;
             return req.session.save(()=>{
                 res.redirect('/user/welcome');
             })

@@ -12,7 +12,7 @@ html
         h1 사용자정보 수정
             -if(user){
                 form(action="/user/update", method="post")
-                    input(type="hidden", name="_method" value="PUT")
+                    input(type="hidden", name="_method" value="put")
                     div
                         input(type='text' name='username' placeholder='username' value=user.username readonly) 
                     div

@@ -14,6 +14,8 @@
     "express-session": "^1.15.6",
     "jquery": "^3.3.1",
     "method-override": "^2.3.10",
+    "pbkdf2": "^3.0.16",
+    "pbkdf2-password": "^1.2.1",
     "pug": "^2.0.3",
     "supervisor": "^0.12.0"
   }

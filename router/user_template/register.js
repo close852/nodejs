@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var path = require('path');
-var bkdf2Password = require('pbkdf2-password');
-var hasher = bkdf2Password();
+
 var userList = require('./userList').userList;
 
 router.route('/user/register')
@@ -24,11 +23,6 @@ router.route('/user/register')
     if(user){
         return res.send('<script>alert("대박.."); location.href="/user/register";</script>')
     }
-    //사용자 값 암호화
-    hasher({password : temp.password},(err,pass,salt,hash)=>{
-        temp.salt = salt;
-        temp.password = hash;
-    })
 
     userList.push(temp);
     req.session.user=temp;

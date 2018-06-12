@@ -3,8 +3,7 @@ var router = express.Router();
 var path = require('path');
 
 var userList = require('./userList').userList;
-var bkdf2Password = require('pbkdf2-password');
-var hasher = bkdf2Password();
+
 router.route('/user/update')
 .get((req,res)=>{
     res.render(path.join('.','user','update'),{user : req.session.user});
@@ -20,9 +19,7 @@ router.route('/user/update')
         console.log(user,temp);
         if(user.username===temp.username){
             if(temp.password){
-                hasher({password:temp.password , salt : user.salt},(err,pass,salt,hash)=>{
-                    user.password = hash;
-                })
+                user.password = temp.password;
             }
             if(temp.displayname){
                 user.displayname = temp.displayname;

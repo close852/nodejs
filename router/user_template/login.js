@@ -1,9 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var bkdf2Password = require('pbkdf2-password');
-var hasher = bkdf2Password();
 var path = require('path');
-var pb
 
 var userList = require('./userList').userList;
 router.get('/user/welcome',(req,res)=>{
@@ -16,25 +13,17 @@ router.route('/user/login')
     res.render(path.join('.','user','login'));
 })
 .post((req,res)=>{
-    console.log('login~~');
     var uname = req.body.username;
     var passwd = req.body.password;
-
     var user = userList.find((u)=>{
-        return (u.username===uname);
+        return (u.username===uname && u.password ===passwd);
     })
     if(user){
-        return hasher({password : passwd , salt : user.salt},(err,pass,salt,hash)=>{
-            if(uname===user.username && hash === user.password){
-                console.log(user,user.displayname);
-                req.session.user=user;
-                req.session.displayname=user.displayname;
-                return req.session.save(()=>{
-                    res.redirect('/user/welcome');
-                })
-            }else{
-                res.redirect('/user/login');
-            }
+        console.log(user,user.displayname);
+        req.session.user=user;
+        req.session.displayname=user.displayname;
+        return req.session.save(()=>{
+            res.redirect('/user/welcome');
         })
     }
     res.redirect('/user/login');
