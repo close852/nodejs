@@ -43,6 +43,7 @@ const encodedPayload = new Buffer(JSON.stringify(payload)).toString('base64').re
 var base64UrlEncode =(encode)=>{
     return new Buffer(JSON.stringify(encode)).toString('base64').replace(/=/gi,''); 
 }
+HMAC-ShA256
 const signature = crypto.createHmac('sha256','secret')
         .update(base64UrlEncode(header)+'.'+base64UrlEncode(payload))
         .digest('base64')
